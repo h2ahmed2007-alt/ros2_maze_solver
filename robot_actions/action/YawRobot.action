@@ -1,0 +1,8 @@
+# goal
+float64 yaw_target
+---
+# Result
+bool success
+---
+# Feedback
+float64 current_yaw
