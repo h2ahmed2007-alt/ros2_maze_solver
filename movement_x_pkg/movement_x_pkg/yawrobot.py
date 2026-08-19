@@ -60,7 +60,7 @@ class yawRobotActionServer(Node):
         #otherwise get the angle 
         Targetrotation = goal.request.yaw_target
           # angle is accumulatively calculated so add it ot current yaw
-           final_angle = normalize_angle(Targetrotation + self.current_yaw)# to turn to degrees
+           final_angle = normalize_angle(Targetrotation + self.current_yaw)
 
          feedback = YawRobot.Feedback()
          result = YawRobot.Result()
