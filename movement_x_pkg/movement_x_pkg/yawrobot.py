@@ -6,7 +6,7 @@ from nav_msgs.msg import Odometry
 import rclpy
 from rclpy.node import Node
 
-from packageName.action import YawRobot
+from robot_actions.action import YawRobot
 from rclpy.action import ActionServer
 
 
