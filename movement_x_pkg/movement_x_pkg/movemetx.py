@@ -1,4 +1,4 @@
-
+import math
 import rclpy
 from rclpy.action import ActionServer
 from rclpy.node import Node
@@ -23,23 +23,27 @@ class MovementXActionServer(Node):
         )
 
         self.current_x = 0.0
+        self.current_y= 0.0
 
         self._action_server = ActionServer(self, Movementros2, 'move_robot_x',self.execute_callback)
 
 
     def odom_callback(self, msg):
         self.current_x = msg.pose.pose.position.x
+        self.current_y = msg.pose.pose.position.y
+        
 
     def execute_callback(self, goal_handle):
         target_distance = goal_handle.request.distance
         start_x = self.current_x
+        start_y = self.current_y
 
         twist = Twist()
         twist.linear.x = 0.2
         rate=self.create_rate(10)
 
         while rclpy.ok():
-            distance_traveled = abs(self.current_x - start_x)
+            distance_traveled = math.sqrt ((self.current_x - start_x) **2 + (self.current_y - start_x) **2)
 
             feedback_msg = Movementros2.Feedback()
             feedback_msg.current_distance = float(distance_traveled)
