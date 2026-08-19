@@ -17,9 +17,9 @@ def normalize_angle(angle):
 #using /odom to find the angle of orientation
 #calculations to turn the x y z w to angle
 def angleoforientation(q):
-     sinYaw = 2.0 * (q.w * q.z + q.x * q.y)
-       cosYaw = 1.0 - 2.0 * (q.y * q.y + q.z * q.z)
-        return math.atan2(sinYaw, cosYaw)
+    sinYaw = 2.0 * (q.w * q.z + q.x * q.y)
+    cosYaw = 1.0 - 2.0 * (q.y * q.y + q.z * q.z)
+    return math.atan2(sinYaw, cosYaw)
 
 
 # server code
