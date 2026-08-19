@@ -5,7 +5,7 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
-from movement_x_pkg.action import Movementros2
+from robot_actions.action import Movementros2
 
 
 class MovementXActionServer(Node):
