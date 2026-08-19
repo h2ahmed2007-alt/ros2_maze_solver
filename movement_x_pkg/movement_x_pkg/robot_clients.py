@@ -1,11 +1,13 @@
-
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
 from robot_actions.action import Movementros2
 from robot_actions.action import YawRobot      
 import math  
+
+
 from std_srvs.srv import SetBool
+import time
 
 class client(Node):
     def __init__(self):
@@ -59,9 +61,7 @@ class client(Node):
 
 ###
 
-    def send_goal_yaw(self, rotation_value):   # to send the call to the server, made it general so the solve_maze decides whether its 0.0 or 90.0 deg
-        
-
+    def send_goal_yaw(self, rotation_value):   # to send the call to the server, made it general so the solve_maze decides whether its 0.0 or 90.0 deg   
         rotation_value = math.radians(rotation_value)
         self.get_logger().info('waiting for server')  
 
@@ -69,7 +69,7 @@ class client(Node):
 
         goal_msg = YawRobot.Goal() #making the goal object
 
-        goal_msg.yawTarget = rotation_value  
+        goal_msg.yaw_target = rotation_value  
 
         self.send_goal_yaw_future = self.yaw_client.send_goal_async(goal_msg, feedback_callback= self.feedback_callback_yaw) #sending the goal to the server, using the feedback func we made to recieve the feedback
 
@@ -93,7 +93,7 @@ class client(Node):
 
     def feedback_callback_yaw(self, feedback_msg):
         feedback = feedback_msg.feedback
-        self.get_logger().info(str(feedback.currentYaw)) #to get the feed back,turned it into str so get_logger can work
+        self.get_logger().info(str(feedback.current_yaw)) #to get the feed back,turned it into str so get_logger can work
 
     def result_callback_yaw(self, future):    #to know wether the goal was success or not
         result = future.result().result
@@ -114,11 +114,33 @@ class client(Node):
 def main():
     rclpy.init()
     node = client()
-    node.send_goal(1.0)  # test: move 1.0 meter forward
-    node.send_goal_yaw(90.0)
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
+
+
+    node.toggle_wall(True)
+    time.sleep(2)
+
+    node.get_logger().info("Starting the robot movement sequence...")
+    node.send_goal_yaw(87.0)
+    time.sleep(1.0)
+
+    node.get_logger().info("Moving forward 2 meters...")
+    node.send_goal(2.0)
+    time.sleep(3.5)
+
+    node.toggle_wall(False)
+    time.sleep(2)
+
+    node.send_goal(0.3)
+    node.get_logger().info("Moving forward 0.5 meters...")
+    time.sleep(2)
+
+    node.send_goal_yaw(-86.0)
+    time.sleep(2)
+
+
+
+    node.send_goal(10)
+
 
 if __name__ == '__main__':
     main()

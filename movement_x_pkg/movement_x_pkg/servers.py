@@ -39,8 +39,8 @@ class MergedServerNode(Node):
         callback_group=self.reentrant_group,
     )
 
-    self.current_x = 0.0
-    self.current_y= 0.0   
+    self.current_x = 0.485
+    self.current_y= 0.5   
     self.current_yaw = 0.0  # to store the rotation angle
     self.move_action_server = ActionServer(
         self,
@@ -72,11 +72,11 @@ class MergedServerNode(Node):
     start_y = self.current_y
 
     twist = Twist()
-    twist.linear.x = 0.2
+    twist.linear.x = 0.4
     rate = self.create_rate(10)
 
     while rclpy.ok():
-      distance_traveled = math.sqrt ((self.current_x - start_x) **2 + (self.current_y - start_x) **2)
+      distance_traveled = math.sqrt ((self.current_x - start_x) **2 + (self.current_y - start_y) **2)
       feedback_msg = Movementros2.Feedback()
       feedback_msg.current_distance = float(distance_traveled)
       goal_handle.publish_feedback(feedback_msg)
