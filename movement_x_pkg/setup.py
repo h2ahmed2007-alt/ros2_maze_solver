@@ -24,9 +24,10 @@ setup(
     },
     entry_points={
         'console_scripts': [
-                    'movement_server = movement_x_pkg.movemetx:main',
-                    'move_robot_client = movement_x_pkg.move_robot_client:main',
-                    'robot_clients = movement_x_pkg.robot_clients:main',
+                    'total_move = movement_x_pkg.total_move:main',
+                    'pid_controller = movement_x_pkg.pid_controller:main',
+                    'pid_servers = movement_x_pkg.pid_servers:main',
+                    'pid_subs = movement_x_pkg.pid_subs:main',
         ],
     },
 )

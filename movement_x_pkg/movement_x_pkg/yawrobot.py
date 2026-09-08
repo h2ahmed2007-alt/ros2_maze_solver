@@ -7,7 +7,7 @@ from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from std_msgs.msg import Float32MultiArray
 from robot_actions.action import YawRobot
-from movement_x_pkg.pid_control import pidcontrol
+from movement_x_pkg.pid_controller import pidcontrol
 
 
 class YawRobotActionServer(Node):
