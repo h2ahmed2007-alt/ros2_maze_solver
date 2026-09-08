@@ -6,7 +6,7 @@ from rclpy.node import Node
 from std_msgs.msg import Float32MultiArray
 
 # Import class from training file (pidcontroller.py)
-from movement_x_pkg.pidcontroller import pidcontrol
+from movement_x_pkg.pid_controller import pidcontrol
 
 
 class MovementXNode(Node):
