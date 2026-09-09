@@ -21,7 +21,7 @@ class RobotMoverNode(Node):
         self.cb_group = ReentrantCallbackGroup()
 
         # ---------- Linear Movement Variables ----------
-        self.target_distance = 2.0
+        self.target_distance = 7.0
         self.start_x = None
         self.start_y = None
         self.current_x = 0.0
